@@ -1,0 +1,26 @@
+{
+  "name": "dog-meet-dog-api",
+  "version": "1.0.0",
+  "description": "dog-meet-dog-api",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ckirk9/dog-meet-dog-api.git"
+  },
+  "author": "Christy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ckirk9/dog-meet-dog-api/issues"
+  },
+  "homepage": "https://github.com/Ckirk9/dog-meet-dog-api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.5",
+    "nodemon": "^2.0.4"
+  }
+}
