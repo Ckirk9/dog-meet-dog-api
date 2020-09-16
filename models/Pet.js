@@ -21,6 +21,26 @@ const petSchema = mongoose.Schema({
     }]
 })
 
+UserSchema.methods = {
+    verifyPassword: function (passwordInput) {
+        return bcrypt.compareSync(passwordInput, this.password)
+    },
+
+    hashPassword: function (plainTextPassword) {
+        const salt = bcrypt.genSaltSync(10)
+        return bcrypt.hashSync(plainTextPassword, salt)
+    }
+}
+
+UserSchema.pre('save', function(next) {
+    if (!this.password) {
+        next()
+    } else {
+        this.password = this.hashPassword(this.password)
+        next()
+    }
+})
+
 
 const Pet = mongoose.model('Pet', PetSchema)
 module.exports = Pet
