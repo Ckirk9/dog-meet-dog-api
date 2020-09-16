@@ -1,5 +1,5 @@
 module.exports = {
-    //entries: require('./messages'),
+    //messages: require('./messages'),
     users: require('./pets'),
     auth: require('./auth')
 }
