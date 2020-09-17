@@ -1,27 +1,27 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 
-const petSchema = mongoose.Schema({
+const PetSchema = Schema({
     username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     bio: {type: String, required: true}, 
     pictureUrl: {type: String, required: false}, 
-    petsLiked: [{type: mongoose.Schema.Types.ObjectId,
+    petsLiked: [{type: Schema.Types.ObjectId,
                 ref: 'Pet',
                 required: false
     }],
-    petsWhoLikeYou: [{ type: mongoose.Schema.Types.ObjectId,
+    petsWhoLikeYou: [{ type: Schema.Types.ObjectId,
                 ref: 'Pet',
                 required: false
     }],
-    matches: [{type: mongoose.Schema.Types.ObjectId,
+    matches: [{type: Schema.Types.ObjectId,
             ref: 'Pet',
             required: false
     }]
 })
 
-UserSchema.methods = {
+PetSchema.methods = {
     verifyPassword: function (passwordInput) {
         return bcrypt.compareSync(passwordInput, this.password)
     },
@@ -32,7 +32,7 @@ UserSchema.methods = {
     }
 }
 
-UserSchema.pre('save', function(next) {
+PetSchema.pre('save', function(next) {
     if (!this.password) {
         next()
     } else {
