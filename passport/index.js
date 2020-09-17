@@ -14,10 +14,10 @@ passport.serializeUser((user, done) => {
 // passport adds the user into to req.user and we can use that to verify the authenticated user
 passport.deserializeUser((id, done) => {
     console.log('passport/index.js: deserializeUser function is invoked') 
-    User.findById(id, 'userName', (err, user) => {
+    Pet.findById(id, 'userName', (err, pet) => {
         if (err) return done(err, null)
-        console.log(user)
-        done(null, user)
+        console.log(pet)
+        done(null, pet)
     })
 })
 

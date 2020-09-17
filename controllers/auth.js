@@ -2,13 +2,11 @@ const db = require('../models')
 const bcrypt = require('bcrypt')
 
 const login = (req, res) => {
-    console.log('req.pet:', req.pet)
-    console.log('req.session:', req.session)
-    res.json({ user: req.pet.username })
+    res.json({ user: req.body.username })
 }
 
 const signUp = (req, res) => {
-    const { username, password } = req.body 
+    const { username, password, bio, pictureUrl } = req.body 
     if (!username || !password) {
         return res.json({
             message: 'Please enter a username and a password'

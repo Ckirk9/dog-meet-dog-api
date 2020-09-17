@@ -12,7 +12,7 @@ const strategy = new LocalStrategy(
             if (err) return done(err)
             if (!foundPet) return done(null, false, {message: 'credentials invalid'})
             if (!foundPet.verifyPassword(password)) return done(null, false, {message: 'credentials invalid'})
-            return done(null, foundUser)
+            return done(null, foundPet)
         })
     }
 )
