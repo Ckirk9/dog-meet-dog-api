@@ -2,7 +2,7 @@ const db = require('../models')
 const bcrypt = require('bcrypt')
 
 const login = (req, res) => {
-    res.json({ user: req.body.username })
+    res.json({ pet: req.body.username })
 }
 
 const signUp = (req, res) => {
@@ -36,14 +36,15 @@ const signUp = (req, res) => {
                 res.json(err)
             }
             delete savedPet.password
-            res.json(savedPet)
+            res.json({ pet: savedPet.username })
         })
         console.log("End save pet");
     })
 }
 
 const signOut = (req, res) => {
-    if (!req.pet) return res.json({
+    console.log('Req.user', req.user);
+    if (!req.user) return res.json({
         message: 'no pet to sign out'
     })
     req.logout()
