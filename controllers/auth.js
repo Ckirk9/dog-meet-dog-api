@@ -43,8 +43,8 @@ const signUp = (req, res) => {
 }
 
 const signOut = (req, res) => {
-    console.log('Req.user', req.user);
-    if (!req.user) return res.json({
+    console.log('Req.pet', req.pet);
+    if (!req.pet) return res.json({
         message: 'no pet to sign out'
     })
     req.logout()
