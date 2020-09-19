@@ -3,7 +3,8 @@ const db = require('../models')
 // controllers
 
 const index = (req, res) => {
-    db.Pet.find({}, (err, foundPets) => {
+    console.log(req.params.username)
+    db.Pet.find({ username:{$ne:req.params.username}}, (err, foundPets) => {
         if (err) console.log('Error in pets#index:', err)
         if(!foundPets.length) return res.json({
             message: 'No saved pets'
