@@ -1,6 +1,7 @@
 const db = require('../models')
 
 // controllers
+
 const index = (req, res) => {
     db.Pet.find({}, (err, foundPets) => {
         if (err) console.log('Error in pets#index:', err)
@@ -8,23 +9,6 @@ const index = (req, res) => {
             message: 'No saved pets'
         })
         res.json({ pets: foundPets})
-    })
-}
-
-const results = (req, res) => {
-    db.Pet.find(req.body), (err, foundPets) => {
-        if (err) console.log(`err in pets#filter: ${err}`)
-        res.status(200).json({ pets: foundPets})
-    }
-}
-
-const show = (req, res) => {
-    db.Pet.findById(req.params.id, (err, foundPet) => {
-        if (err) console.log('Error in pets show:', err)
-        if (!foundPet) return res.json({
-            message: "no pet found by that id"
-        })
-        res.json({ pet: foundPet})
     })
 }
 
@@ -44,7 +28,7 @@ const update = (req, res) => {
         })
     })
 }
- 
+
 const destroy = (req, res) => {
     db.Pet.findByIdAndDelete(req.params.id, (err, deletedPet) => {
         if (err) console.log(`error in pets#destroy: ${err}`)
@@ -54,9 +38,7 @@ const destroy = (req, res) => {
 
 module.exports = {
     index,
-    show,
     create,
     update,
-    destroy,
-    results
+    destroy
 }

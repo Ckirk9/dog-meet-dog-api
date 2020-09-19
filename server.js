@@ -40,6 +40,8 @@ app.use(passport.session())
 //middleware- API routes
 // app.use('/api/v1/ ', routes. )
 app.use('/api/v1/auth', routes.auth)
+app.use('/api/v1/pet', routes.pet)
+app.use('/api/v1/pets', routes.pets)
 
 
 app.listen(process.env.PORT || 5000, () => {
