@@ -7,15 +7,15 @@ const PetSchema = Schema({
     password: {type: String, required: true},
     bio: {type: String, required: true}, 
     pictureUrl: {type: String, required: false}, 
-    petsLiked: [{type: Schema.Types.ObjectId,
+    petsLiked: [{type: String,
                 ref: 'Pet',
                 required: false
     }],
-    petsWhoLikeYou: [{ type: Schema.Types.ObjectId,
+    petsWhoLikeYou: [{ type: String,
                 ref: 'Pet',
                 required: false
     }],
-    matches: [{type: Schema.Types.ObjectId,
+    matches: [{type: String,
             ref: 'Pet',
             required: false
     }]

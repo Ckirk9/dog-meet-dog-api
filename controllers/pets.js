@@ -37,9 +37,24 @@ const destroy = (req, res) => {
     })
 }
 
+const likes = (req, res) => {
+    db.Pet.updateOne(
+        { username: req.params.username }, 
+        { $push: { petsLiked: req.body.likedPet } },
+        (err, updatedPet) => {
+            if (err) console.log('error in pet update:', err)
+            res.json({
+                pet: updatedPet,
+                message: `${updatedPet.username} now likes ${req.body.likedPet}`
+            })
+        }
+    );
+}
+
 module.exports = {
     index,
     create,
     update,
-    destroy
+    destroy,
+    likes,
 }
