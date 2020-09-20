@@ -21,11 +21,11 @@ const create = (req, res) => {
 }
 
 const update = (req, res) => {
-    db.Pet.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedPet) => {
+    db.Pet.findOneAndUpdate({ username: req.params.username }, req.body, {new: true}, (err, updatedPet) => {
         if (err) console.log('error in pet update:', err)
         res.json({
             pet: updatedPet,
-            message: `${updatedPet.username} preferences were updated successfully`
+            message: `${updatedPet.username} profile updated successfully`
         })
     })
 }
