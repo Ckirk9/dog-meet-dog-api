@@ -59,21 +59,30 @@ const likes = (req, res) => {
 }
 
 const message = (req, res) => {
+    console.log('Req params: ', req.params);
+    console.log('Req.body: ', req.body);
     db.Pet.updateOne(
         { username: req.params.username }, 
         { 
             $push: { 
-            petsLiked: req.body.likedPet
-        }, 
-            $set: {
-                [`conversations.$.${req.body.likedPet}`]: [],
-            }
+                [`conversations.${req.body.likedPet}`]: { message: req.body.message, sender: req.params.username }
+            }, 
         },
         (err, updatedPet) => {
             if (err) console.log('error in pet update:', err)
+        }
+    );
+    db.Pet.updateOne(
+        { username: req.body.likedPet }, 
+        { 
+            $push: { 
+                [`conversations.${req.params.username}`]: { message: req.body.message, sender: req.params.username }
+            }, 
+        },
+        (err) => {
+            if (err) console.log('error in pet update:', err)
             res.json({
-                pet: updatedPet,
-                message: `${updatedPet.username} now likes ${req.body.likedPet}`
+                message: 'Success!'
             })
         }
     );
@@ -85,4 +94,5 @@ module.exports = {
     update,
     destroy,
     likes,
+    message,
 }

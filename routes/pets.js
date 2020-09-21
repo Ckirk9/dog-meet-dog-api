@@ -6,5 +6,6 @@ router.post('/', ctrl.pets.create)
 router.put('/:username', ctrl.pets.update)
 router.delete('/:username', ctrl.pets.destroy)
 router.put('/likes/:username', ctrl.pets.likes)
+router.put('/message/:username', ctrl.pets.message)
 
 module.exports = router
