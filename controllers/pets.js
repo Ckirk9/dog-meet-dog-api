@@ -40,7 +40,35 @@ const destroy = (req, res) => {
 const likes = (req, res) => {
     db.Pet.updateOne(
         { username: req.params.username }, 
-        { $push: { petsLiked: req.body.likedPet } },
+        { 
+            $push: { 
+            petsLiked: req.body.likedPet
+        }, 
+            $set: {
+                [`conversations.${req.body.likedPet}`]: [],
+            }
+        },
+        (err, updatedPet) => {
+            if (err) console.log('error in pet update:', err)
+            res.json({
+                pet: updatedPet,
+                message: `${req.params.username} now likes ${req.body.likedPet}`
+            })
+        }
+    );
+}
+
+const message = (req, res) => {
+    db.Pet.updateOne(
+        { username: req.params.username }, 
+        { 
+            $push: { 
+            petsLiked: req.body.likedPet
+        }, 
+            $set: {
+                [`conversations.$.${req.body.likedPet}`]: [],
+            }
+        },
         (err, updatedPet) => {
             if (err) console.log('error in pet update:', err)
             res.json({

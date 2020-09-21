@@ -18,7 +18,8 @@ const PetSchema = Schema({
     matches: [{type: String,
             ref: 'Pet',
             required: false
-    }]
+    }],
+    conversations: { type: Schema.Types.Mixed },
 })
 
 PetSchema.methods = {
